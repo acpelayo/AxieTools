@@ -59,7 +59,7 @@ function resetEnergyHistory(history) {
 }
 
 function newWindow() {
-    window.open(devMode ? '/' : 'AxieTools', '', 'width=300,height=600');
+    window.open(devMode ? '/' : 'index.html', '', 'width=300,height=600');
 }
 
 window.onload = initDOM;
