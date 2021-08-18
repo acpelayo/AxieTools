@@ -1,4 +1,5 @@
 const energy = [3];
+const devMode = false;
 
 function initDOM() {
     const buttons = document.querySelector('#btn');
@@ -58,7 +59,7 @@ function resetEnergyHistory(history) {
 }
 
 function newWindow() {
-    window.open('/', '', 'width=300,height=600');
+    window.open(devMode ? '/' : 'AxieTools', '', 'width=300,height=600');
 }
 
-initDOM();
+window.onload = initDOM;
