@@ -2,6 +2,7 @@ const energy = [3];
 const devMode = false;
 
 function initDOM() {
+    const preloader = document.querySelector('#preloader');
     const buttons = document.querySelector('#btn');
     const energyDisplay = document.querySelector('#energy');
     const energyHistory = document.querySelector('#history');
@@ -23,6 +24,19 @@ function initDOM() {
             }
         }
     });
+
+    hidePreloader(preloader);
+}
+
+function hidePreloader(preloader) {
+    // preloader.classList.add('fade-out');
+    const img = preloader.children[0];
+    img.classList.remove('slide-in');
+    img.classList.add('slide-out');
+    preloader.classList.add('fade-out');
+    setTimeout(() => {
+        preloader.style.display = 'none';
+    }, 1100);
 }
 
 function reset(energyDisplay, energyHistory) {

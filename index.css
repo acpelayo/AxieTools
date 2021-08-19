@@ -20,6 +20,60 @@
     font-family: Poppins, Arial, Helvetica, sans-serif;
 }
 
+@keyframes slide-in {
+    from {
+        transform: translate(0, -100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(0, -100px);
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+#preloader {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--white);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-in {
+    animation: slide-in 1s ease forwards;
+}
+
+.slide-out {
+    animation: slide-out 1s ease forwards;
+}
+
+.fade-out {
+    animation: fade-out 1s ease forwards;
+}
+
 body {
     background: fixed url('./assets/images/bg.png') center/cover no-repeat;
 }
