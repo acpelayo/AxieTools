@@ -29,7 +29,6 @@ function initDOM() {
 }
 
 function hidePreloader(preloader) {
-    // preloader.classList.add('fade-out');
     const img = preloader.children[0];
     img.classList.remove('slide-in');
     img.classList.add('slide-out');
