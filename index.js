@@ -1,11 +1,28 @@
 const energy = [3];
-const devMode = false;
 
 function initDOM() {
     const preloader = document.querySelector('#preloader');
     const buttons = document.querySelector('#btn');
     const energyDisplay = document.querySelector('#energy');
     const energyHistory = document.querySelector('#history');
+    const menu = document.querySelector('#menu');
+    const menuTargets = document.querySelectorAll('[data-target-index]');
+
+    menu.addEventListener('click', (e) => {
+        target = e.target;
+        index = +target.dataset.menuIndex;
+
+        switch (index) {
+            case 1:
+                newWindow();
+                break;
+            case 2:
+                showTab(menu, menuTargets, index);
+                break;
+            default:
+                break;
+        }
+    });
 
     buttons.addEventListener('click', (e) => {
         const target = e.target;
@@ -28,14 +45,49 @@ function initDOM() {
     hidePreloader(preloader);
 }
 
-function hidePreloader(preloader) {
-    const img = preloader.children[0];
-    img.classList.remove('slide-in');
-    img.classList.add('slide-out');
-    preloader.classList.add('fade-out');
-    setTimeout(() => {
-        preloader.style.display = 'none';
-    }, 1100);
+// menu functions
+function showTab(menu, targets, index) {
+    for (let i = 0; i < targets.length; i++) {
+        if (targets[i].dataset.targetIndex == index) {
+            const isHidden = targets[i].classList.contains('hidden');
+            const c = targets[i].classList;
+            if (isHidden) {
+                c.remove('hidden');
+                c.remove('slide-out-left');
+                c.add('slide-in-left');
+                targets[i].onanimationstart = () => {
+                    setActive(menu.children, index);
+                };
+            } else {
+                c.remove('slide-in-left');
+                c.add('slide-out-left');
+                targets[i].onanimationend = () => {
+                    c.add('hidden');
+                    targets[i].onanimationend = undefined;
+                };
+            }
+        } else targets[i].classList.remove('hidden');
+    }
+}
+
+function setActive(menu, index) {
+    for (let i = 0; i < menu.length; i++) {
+        if (menu[i].dataset.menuIndex == index) menu[i].classList.toggle('active');
+        else menu[i].classList.remove('active');
+    }
+}
+
+// energy functions
+function updateEnergyDisplay(display, newVal) {
+    display.innerText = newVal;
+}
+
+function appendEnergyHistory(history, newVal, isNewRound = false) {
+    history.innerHTML += `<div class="history-text${isNewRound ? ' new-round' : ''}">${newVal >= 0 ? '+' + newVal : newVal}</div>`;
+}
+
+function resetEnergyHistory(history) {
+    history.innerHTML = `<div class="history-text">3</div>`;
 }
 
 function reset(energyDisplay, energyHistory) {
@@ -59,20 +111,21 @@ function appendEnergy(newEnergy, isNewRound = false) {
     return sum + newEnergy;
 }
 
-function updateEnergyDisplay(display, newVal) {
-    display.innerText = newVal;
-}
-
-function appendEnergyHistory(history, newVal, isNewRound = false) {
-    history.innerHTML += `<div class="history-text${isNewRound ? ' new-round' : ''}">${newVal >= 0 ? '+' + newVal : newVal}</div>`;
-}
-
-function resetEnergyHistory(history) {
-    history.innerHTML = `<div class="history-text new-round">3</div>`;
-}
-
+// window functions
 function newWindow() {
-    window.open(devMode ? '/' : 'index.html', '', 'width=300,height=600');
+    window.open('index.html', '', 'width=300,height=600');
+}
+
+function hideTabs(targets) {
+    targets.forEach((target) => target.classList.add('hidden'));
+}
+
+function hidePreloader(preloader) {
+    const img = preloader.children[0];
+    img.classList.remove('slide-in-top');
+    img.classList.add('slide-out-top');
+    preloader.classList.add('fade-out');
+    preloader.onanimationend = () => preloader.classList.add('hidden');
 }
 
 window.onload = initDOM;

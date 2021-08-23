@@ -20,7 +20,7 @@
     font-family: Poppins, Arial, Helvetica, sans-serif;
 }
 
-@keyframes slide-in {
+@keyframes slide-in-top {
     from {
         transform: translate(0, -100px);
         opacity: 0;
@@ -32,13 +32,39 @@
     }
 }
 
-@keyframes slide-out {
+@keyframes slide-out-top {
     from {
         transform: translate(0, 0);
+        opacity: 1;
     }
 
     to {
         transform: translate(0, -100px);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-in-left {
+    from {
+        transform: translate(-100vw);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out-left {
+    from {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translate(-100vw, 0);
+        opacity: 0;
     }
 }
 
@@ -60,14 +86,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 101;
 }
 
-.slide-in {
-    animation: slide-in 1s ease forwards;
+.slide-in-top {
+    animation: slide-in-top 1s ease forwards;
 }
 
-.slide-out {
-    animation: slide-out 1s ease forwards;
+.slide-out-top {
+    animation: slide-out-top 1s ease forwards;
+}
+
+.slide-in-left {
+    animation: slide-in-left 500ms ease forwards;
+}
+
+.slide-out-left {
+    animation: slide-out-left 500ms ease forwards;
 }
 
 .fade-out {
@@ -90,6 +125,8 @@ div.container {
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+    position: relative;
+    overflow: hidden;
 }
 
 div.scroll {
@@ -109,18 +146,58 @@ div.scroll {
     min-height: 35px;
     margin-bottom: auto;
     padding-top: 10px;
+    position: absolute;
+    top: 0;
+    z-index: 100;
 }
 
-#menu > svg.popup {
+#menu > .icon {
     width: 25px;
     height: 25px;
     fill: var(--brown);
     transition: 200ms ease;
     cursor: pointer;
+    margin-right: 10px;
 }
 
-#menu > svg.popup:hover {
-    fill: var(--white);
+@media (hover: hover) {
+    #menu > .icon:hover {
+        fill: var(--orange);
+        transform: scale(1.4);
+    }
+}
+
+#menu > .active {
+    fill: var(--orange);
+    transform: scale(1.4);
+}
+
+#menu svg > * {
+    pointer-events: none;
+}
+
+#class-chart {
+    position: absolute;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#class-chart > p {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#class-chart > img {
+    width: 100%;
+    /* height: 100%; */
+    object-fit: contain;
 }
 
 #energy {
@@ -217,4 +294,8 @@ div.history-text {
 
 .history-text.new-round {
     color: var(--orange);
+}
+
+.hidden {
+    display: none !important;
 }
