@@ -20,9 +20,34 @@
     font-family: Poppins, Arial, Helvetica, sans-serif;
 }
 
-@keyframes slide-in-top {
+/* animations */
+@keyframes slide-in-preloader {
     from {
         transform: translate(0, -100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out-preloader {
+    from {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translate(0, -100px);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-in-top {
+    from {
+        transform: translate(0, -100vh);
         opacity: 0;
     }
 
@@ -39,31 +64,7 @@
     }
 
     to {
-        transform: translate(0, -100px);
-        opacity: 0;
-    }
-}
-
-@keyframes slide-in-left {
-    from {
-        transform: translate(-100vw);
-        opacity: 0;
-    }
-
-    to {
-        transform: translate(0, 0);
-        opacity: 1;
-    }
-}
-
-@keyframes slide-out-left {
-    from {
-        transform: translate(0, 0);
-        opacity: 1;
-    }
-
-    to {
-        transform: translate(-100vw, 0);
+        transform: translate(0, -100vh);
         opacity: 0;
     }
 }
@@ -78,6 +79,26 @@
     }
 }
 
+.slide-in-preloader {
+    animation: slide-in-preloader 1s ease forwards;
+}
+
+.slide-out-preloader {
+    animation: slide-out-preloader 1s ease forwards;
+}
+
+.slide-in-top {
+    animation: slide-in-top 500ms ease forwards;
+}
+
+.slide-out-top {
+    animation: slide-out-top 500ms ease forwards;
+}
+
+.fade-out {
+    animation: fade-out 1s ease forwards;
+}
+
 #preloader {
     width: 100vw;
     height: 100vh;
@@ -89,24 +110,19 @@
     z-index: 101;
 }
 
-.slide-in-top {
-    animation: slide-in-top 1s ease forwards;
+/* general styling */
+.hidden {
+    display: none !important;
 }
 
-.slide-out-top {
-    animation: slide-out-top 1s ease forwards;
+h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 6px;
 }
 
-.slide-in-left {
-    animation: slide-in-left 500ms ease forwards;
-}
-
-.slide-out-left {
-    animation: slide-out-left 500ms ease forwards;
-}
-
-.fade-out {
-    animation: fade-out 1s ease forwards;
+h3 {
+    font-size: 20px;
 }
 
 body {
@@ -126,6 +142,21 @@ div.container {
     justify-content: flex-end;
     align-items: center;
     position: relative;
+}
+
+div.info-card {
+    height: 95%;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    position: absolute;
+    background: var(--white);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translate(0, -100vh);
     overflow: hidden;
 }
 
@@ -140,10 +171,10 @@ div.scroll {
     justify-content: flex-end;
 }
 
+/* menu styling */
 #menu {
-    height: 10%;
+    height: 35px;
     width: 90%;
-    min-height: 35px;
     margin-bottom: auto;
     padding-top: 10px;
     position: absolute;
@@ -176,30 +207,54 @@ div.scroll {
     pointer-events: none;
 }
 
+/* class chart styling */
 #class-chart {
-    position: absolute;
-    background: var(--white);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
-#class-chart > p {
-    font-size: 20px;
-    margin-bottom: 10px;
 }
 
 #class-chart > img {
     width: 100%;
-    /* height: 100%; */
     object-fit: contain;
 }
 
+/* status effects styling */
+#status-effects {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#status-effects > div {
+    width: 100%;
+    height: calc(100% - 50px);
+    margin-top: auto;
+    padding: 0 5% 10%;
+    overflow-y: scroll;
+}
+
+#status-effects p {
+    margin-bottom: 16px;
+}
+
+#status-effects h2 {
+    margin-bottom: 0;
+}
+
+#status-effects img {
+    vertical-align: middle;
+    width: 30px;
+    margin-right: 10px;
+}
+
+#status-effects hr {
+    margin: 40px 0;
+}
+
+/* energy display styling */
 #energy {
     /* fallback */
     font-size: 30vh;
@@ -215,6 +270,7 @@ div.scroll {
     pointer-events: none;
 }
 
+/* energy button styling */
 #btn {
     height: 20%;
     max-height: 100px;
@@ -271,6 +327,7 @@ div.scroll {
     width: 37.5%;
 }
 
+/* history styling */
 div#history {
     --margin: 10px;
     width: calc(100% - var(--margin) * 2);
@@ -294,8 +351,4 @@ div.history-text {
 
 .history-text.new-round {
     color: var(--orange);
-}
-
-.hidden {
-    display: none !important;
 }

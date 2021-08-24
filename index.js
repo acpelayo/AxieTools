@@ -17,7 +17,8 @@ function initDOM() {
                 newWindow();
                 break;
             case 2:
-                showTab(menu, menuTargets, index);
+            case 3:
+                showTab(menu.children, menuTargets, index);
                 break;
             default:
                 break;
@@ -46,28 +47,73 @@ function initDOM() {
 }
 
 // menu functions
-function showTab(menu, targets, index) {
-    for (let i = 0; i < targets.length; i++) {
-        if (targets[i].dataset.targetIndex == index) {
-            const isHidden = targets[i].classList.contains('hidden');
-            const c = targets[i].classList;
-            if (isHidden) {
-                c.remove('hidden');
-                c.remove('slide-out-left');
-                c.add('slide-in-left');
-                targets[i].onanimationstart = () => {
-                    setActive(menu.children, index);
-                };
-            } else {
-                c.remove('slide-in-left');
-                c.add('slide-out-left');
-                targets[i].onanimationend = () => {
-                    c.add('hidden');
-                    targets[i].onanimationend = undefined;
-                };
-            }
-        } else targets[i].classList.remove('hidden');
+function showTab(menu, targets, toggleIndex) {
+    // check for current active tab
+    let activeIndex = undefined;
+    for (let i = 0; i < menu.length; i++) {
+        if (menu[i].classList.contains('active')) {
+            activeIndex = menu[i].dataset.menuIndex;
+            break;
+        }
     }
+
+    // toggle menu buttons
+    for (let i = 0; i < menu.length; i++) {
+        const btn = menu[i];
+        if (btn.dataset.menuIndex == toggleIndex) {
+            btn.classList.toggle('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    }
+
+    if (activeIndex) {
+        // when a tab is open
+        if (activeIndex == toggleIndex) {
+            // when the current tab is clicked again
+            for (let i = 0; i < targets.length; i++) {
+                if (targets[i].dataset.targetIndex == activeIndex) {
+                    tabSlideOut(targets[i]);
+                }
+            }
+        } else {
+            // when another tab is clicked
+            for (let i = 0; i < targets.length; i++) {
+                if (targets[i].dataset.targetIndex == activeIndex) {
+                    tabSlideOut(targets[i]);
+                }
+                if (targets[i].dataset.targetIndex == toggleIndex) {
+                    tabSlideIn(targets[i]);
+                }
+            }
+        }
+    } else {
+        // when all tabs are closed
+        for (let i = 0; i < targets.length; i++) {
+            if (targets[i].dataset.targetIndex == toggleIndex) {
+                tabSlideIn(targets[i]);
+            }
+        }
+    }
+}
+
+function tabSlideIn(element) {
+    const c = element.classList;
+    c.remove('hidden', 'slide-out-top');
+    c.add('slide-in-top');
+    element.onanimationend = () => {
+        element.onanimationend = undefined;
+    };
+}
+
+function tabSlideOut(element) {
+    const c = element.classList;
+    c.remove('slide-in-top');
+    c.add('slide-out-top');
+    element.onanimationend = () => {
+        c.add('hidden');
+        element.onanimationend = undefined;
+    };
 }
 
 function setActive(menu, index) {
@@ -122,8 +168,8 @@ function hideTabs(targets) {
 
 function hidePreloader(preloader) {
     const img = preloader.children[0];
-    img.classList.remove('slide-in-top');
-    img.classList.add('slide-out-top');
+    img.classList.remove('slide-in-preloader');
+    img.classList.add('slide-out-preloader');
     preloader.classList.add('fade-out');
     preloader.onanimationend = () => preloader.classList.add('hidden');
 }
