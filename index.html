@@ -3,15 +3,21 @@
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" />
+        <meta name="theme-color" content="#d35400" />
         <link rel="stylesheet" href="index.css" />
-        <link rel="shortcut icon" href="./assets/images/icon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="./assets/icons/icon.ico" type="image/x-icon" />
+        <link rel="manifest" href="manifest.json" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://api.coingecko.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link rel="apple-touch-icon" href="/assets/icons/icon-192.png" />
         <script src="index.js" defer></script>
-        <title>Axie Energy Counter</title>
+        <title>Axie Helper</title>
     </head>
     <body>
         <div id="preloader">
-            <img class="slide-in-preloader" src="./assets/images/floating_axie.gif" alt="floating_axie" />
+            <img class="slide-in-preloader" src="./assets/images/floating_axie.webp" alt="floating_axie" />
         </div>
         <div class="container">
             <div id="menu">
@@ -52,49 +58,107 @@
                         d="m6 21c.55228475 0 1-.4477153 1-1v-1h1c.55228475 0 1-.4477153 1-1s-.44771525-1-1-1h-1v-1c0-.5522847-.44771525-1-1-1s-1 .4477153-1 1v1h-1c-.55228475 0-1 .4477153-1 1s.44771525 1 1 1h1v1c0 .5522847.44771525 1 1 1z"
                     />
                 </svg>
+                <svg viewbox="0 0 512 512" class="icon" data-menu-index="4">
+                    <path
+                        d="m256 0c-140.960938 0-256 115.050781-256 256 0 140.960938 115.050781 256 256 256 140.960938 0 256-115.050781 256-256 0-140.960938-115.050781-256-256-256zm0 482c-124.617188 0-226-101.382812-226-226s101.382812-226 226-226 226 101.382812 226 226-101.382812 226-226 226zm0 0"
+                    />
+                    <path
+                        d="m117.835938 117.835938c-120.355469 120.351562-37.582032 333.089843 138.566406 333.089843 94.800781 0 170.851562-66.316406 189.632812-150.441406 43.640625-195.460937-193.414062-317.433594-328.199218-182.648437zm298.921874 176.113281c-13.40625 60.046875-62.761718 109.402343-122.808593 122.808593-56.523438 12.617188-114.304688-3.882812-154.5625-44.144531-101.492188-101.492187-33.882813-281.527343 116.148437-281.527343 43.738282 0 85.726563 16.945312 117.078125 48.300781 40.261719 40.257812 56.761719 98.039062 44.144531 154.5625zm0 0"
+                    />
+                    <path
+                        d="m256 136c-16.757812 0-59.765625 0-75 0v45h-30v30h30v15h-30v30h30v120h30v-75h45c30.691406 0 57.121094-18.539062 68.71875-45h36.28125v-30h-30v-15h30v-30h-36.28125c-11.597656-26.460938-38.027344-45-68.71875-45zm-45 30h45c13.296875 0 25.261719 5.800781 33.503906 15h-78.503906zm45 105h-45v-15h78.503906c-8.242187 9.199219-20.207031 15-33.503906 15zm45-45h-90v-15h90zm0 0"
+                    />
+                </svg>
             </div>
             <div id="class-chart" data-target-index="2" class="hidden info-card">
-                <h2>CLASS STRENGTHS AND WEAKNESSES</h2>
-                <img src="./assets/images/weakness-chart.png" alt="weakness chart" />
+                <div class="card-contents">
+                    <h2>CLASS STRENGTHS AND WEAKNESSES</h2>
+                    <img src="./assets/images/weakness-chart.png" alt="weakness chart" />
+                </div>
             </div>
             <div id="status-effects" data-target-index="3" class="hidden info-card">
-                <div>
+                <div class="card-contents">
                     <h2>BUFFS</h2>
-
-                    <h3><img src="./assets/images/speedup.png" alt="speed up" /> Speed Up</h3>
+                    <h3><img src="./assets/icons/speedup.png" alt="speed up" /> Speed Up</h3>
                     <p>Increases Axies Speed by 20%. For a designated time. Can stack.</p>
-                    <h3><img src="./assets/images/moraleup.png" alt="morale up" /> Morale Up</h3>
+                    <h3><img src="./assets/icons/moraleup.png" alt="morale up" /> Morale Up</h3>
                     <p>Increases Axies Morale by 20% . For a designated time. Can stack.</p>
-                    <h3><img src="./assets/images/attackup.png" alt="attack up" /> Attack Up</h3>
+                    <h3><img src="./assets/icons/attackup.png" alt="attack up" /> Attack Up</h3>
                     <p>Increases Axies Attack by 20% . Stays until next attack. Can stack.</p>
                     <hr />
                     <h2>DEBUFFS</h2>
-                    <h3><img src="./assets/images/stun.png" alt="stun" />Stun</h3>
+                    <h3><img src="./assets/icons/stun.png" alt="stun" />Stun</h3>
                     <p>Axie skips its next attack or defense. Stays until Axie tries to attack.</p>
-                    <h3><img src="./assets/images/aroma.png" alt="aroma" />Aroma</h3>
+                    <h3><img src="./assets/icons/aroma.png" alt="aroma" />Aroma</h3>
                     <p>Axie will draw all incoming attacks. For a designated time.</p>
-                    <h3><img src="./assets/images/chill.png" alt="chill" />Chill</h3>
+                    <h3><img src="./assets/icons/chill.png" alt="chill" />Chill</h3>
                     <p>Axie cannot enter last stand. For a designated time.</p>
-                    <h3><img src="./assets/images/fear.png" alt="fear" />Fear</h3>
+                    <h3><img src="./assets/icons/fear.png" alt="fear" />Fear</h3>
                     <p>Axie cannot attack. For a designated time.</p>
-                    <h3><img src="./assets/images/fragile.png" alt="fragile" />Fragile</h3>
+                    <h3><img src="./assets/icons/fragile.png" alt="fragile" />Fragile</h3>
                     <p>Shield takes 200% damage. For a designated time.</p>
-                    <h3><img src="./assets/images/jinx.png" alt="jinx" />Jinx</h3>
+                    <h3><img src="./assets/icons/jinx.png" alt="jinx" />Jinx</h3>
                     <p>Axie cannot score critical hits. For a designated time.</p>
-                    <h3><img src="./assets/images/lethal.png" alt="lethal" />Lethal</h3>
+                    <h3><img src="./assets/icons/lethal.png" alt="lethal" />Lethal</h3>
                     <p>Next hit on this Axie is always a critical strike. Stays until attacked.</p>
-                    <h3><img src="./assets/images/poison.png" alt="poison" />Poison</h3>
+                    <h3><img src="./assets/icons/poison.png" alt="poison" />Poison</h3>
                     <p>Axie loses 3hp each turn taken (by either team). Can stack. Stays until its removed.</p>
-                    <h3><img src="./assets/images/sleep.png" alt="sleep" />Sleep</h3>
+                    <h3><img src="./assets/icons/sleep.png" alt="sleep" />Sleep</h3>
                     <p>Axie cannot defend next time it is hit. Stays until Axie tries to attack.</p>
-                    <h3><img src="./assets/images/stench.png" alt="stench" />Stench</h3>
+                    <h3><img src="./assets/icons/stench.png" alt="stench" />Stench</h3>
                     <p>Axie is ignored when there are 2 or more targets. For a designated time.</p>
-                    <h3><img src="./assets/images/speeddown.png" alt="speed down" />Speed Down</h3>
+                    <h3><img src="./assets/icons/speeddown.png" alt="speed down" />Speed Down</h3>
                     <p>Decreases Axies speed by 20%. For a designated time. Can Stack.</p>
-                    <h3><img src="./assets/images/moraledown.png" alt="morale down" />Morale Down</h3>
+                    <h3><img src="./assets/icons/moraledown.png" alt="morale down" />Morale Down</h3>
                     <p>Decreases Axies morale by 20%. For a designated time. Can Stack.</p>
-                    <h3><img src="./assets/images/attackdown.png" alt="attack down" />Attack Down</h3>
+                    <h3><img src="./assets/icons/attackdown.png" alt="attack down" />Attack Down</h3>
                     <p>Decreases Axies attack by 20%. Stays until next attack. Can Stack.</p>
+                </div>
+            </div>
+            <div id="slp-calc" data-target-index="4" class="hidden info-card">
+                <div class="card-contents">
+                    <h2>SLP Calculator</h2>
+                    <table>
+                        <tr>
+                            <td>
+                                <p id="slp-price">Fetching SLP price...</p>
+                                <p id="slp-timestamp">via www.coingecko.com</p>
+                            </td>
+                            <td>
+                                <svg viewbox="0 0 491.236 491.236" id="refresh-slp">
+                                    <path
+                                        d="M55.89,262.818c-3-26-0.5-51.1,6.3-74.3c22.6-77.1,93.5-133.8,177.6-134.8v-50.4c0-2.8,3.5-4.3,5.8-2.6l103.7,76.2
+                c1.7,1.3,1.7,3.9,0,5.1l-103.6,76.2c-2.4,1.7-5.8,0.2-5.8-2.6v-50.3c-55.3,0.9-102.5,35-122.8,83.2c-7.7,18.2-11.6,38.3-10.5,59.4
+                c1.5,29,12.4,55.7,29.6,77.3c9.2,11.5,7,28.3-4.9,37c-11.3,8.3-27.1,6-35.8-5C74.19,330.618,59.99,298.218,55.89,262.818z
+                 M355.29,166.018c17.3,21.5,28.2,48.3,29.6,77.3c1.1,21.2-2.9,41.3-10.5,59.4c-20.3,48.2-67.5,82.4-122.8,83.2v-50.3
+                c0-2.8-3.5-4.3-5.8-2.6l-103.7,76.2c-1.7,1.3-1.7,3.9,0,5.1l103.6,76.2c2.4,1.7,5.8,0.2,5.8-2.6v-50.4
+                c84.1-0.9,155.1-57.6,177.6-134.8c6.8-23.2,9.2-48.3,6.3-74.3c-4-35.4-18.2-67.8-39.5-94.4c-8.8-11-24.5-13.3-35.8-5
+                C348.29,137.718,346.09,154.518,355.29,166.018z"
+                                    />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="slp-quantity">SLP Quantity:</label></td>
+                            <td><input type="number" name="slp-quantity" id="slp-quantity" value="0" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="scholar-share">Scholar's Share (%):</label></td>
+                            <td><input type="number" name="scholar-share" id="scholar-share" max="100" min="0" value="50" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="manager-share">Manager's Share (%):</label></td>
+                            <td><input type="number" name="manager-share" id="manager-share" disabled value="50" /></td>
+                        </tr>
+                    </table>
+                    <div class="slp-price-container"></div>
+
+                    <div class="input-container"></div>
+                    <div class="input-container"></div>
+                    <div class="input-container"></div>
+                    <p id="slp-php"></p>
+                    <p id="manager-slp"></p>
+                    <p id="scholar-slp"></p>
                 </div>
             </div>
             <div class="scroll">
@@ -113,7 +177,9 @@
                 </div>
             </div>
             <div id="history">
-                <div class="history-text">3</div>
+                <div>
+                    <div class="history-text">3</div>
+                </div>
             </div>
         </div>
     </body>

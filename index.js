@@ -1,16 +1,58 @@
 const energy = [3];
+let slpPrice;
 
 function initDOM() {
     const preloader = document.querySelector('#preloader');
     const buttons = document.querySelector('#btn');
     const energyDisplay = document.querySelector('#energy');
-    const energyHistory = document.querySelector('#history');
+    const energyHistory = document.querySelector('#history > div');
     const menu = document.querySelector('#menu');
     const menuTargets = document.querySelectorAll('[data-target-index]');
+    const slpBtn = document.querySelector('#refresh-slp');
+    const slpQuantity = document.querySelector('#slp-quantity');
+    const scholarShare = document.querySelector('#scholar-share');
+    const managerShare = document.querySelector('#manager-share');
+
+    document.addEventListener('gesturestart', function (e) {
+        e.preventDefault();
+        // special hack to prevent zoom-to-tabs gesture in safari
+        document.body.style.zoom = 1;
+    });
+
+    document.addEventListener('gesturechange', function (e) {
+        e.preventDefault();
+        // special hack to prevent zoom-to-tabs gesture in safari
+        document.body.style.zoom = 1;
+    });
+
+    document.addEventListener('gestureend', function (e) {
+        e.preventDefault();
+        // special hack to prevent zoom-to-tabs gesture in safari
+        document.body.style.zoom = 1;
+    });
+
+    slpBtn.addEventListener('click', getSLP);
+    getSLP();
+
+    slpQuantity.addEventListener('input', (e) => {
+        const t = e.target;
+        if (t.value <= 0) t.value = 0;
+        else t.value = +t.value;
+        updateSLPPHP();
+    });
+
+    scholarShare.addEventListener('input', (e) => {
+        const t = e.target;
+        if (t.value > 100) t.value = 100;
+        else if (t.value < 0) t.value = 0;
+        else t.value = +t.value;
+
+        managerShare.value = 100 - t.value;
+        updateSLPPHP();
+    });
 
     menu.addEventListener('click', (e) => {
-        target = e.target;
-        index = +target.dataset.menuIndex;
+        const index = +e.target.dataset.menuIndex;
 
         switch (index) {
             case 1:
@@ -18,7 +60,8 @@ function initDOM() {
                 break;
             case 2:
             case 3:
-                showTab(menu.children, menuTargets, index);
+            case 4:
+                showCard(menu.children, menuTargets, index);
                 break;
             default:
                 break;
@@ -26,16 +69,16 @@ function initDOM() {
     });
 
     buttons.addEventListener('click', (e) => {
-        const target = e.target;
+        const t = e.target;
 
-        if (target.id == 'endRound') {
+        if (t.id == 'endRound') {
             const newSum = appendEnergy(2, true);
             updateEnergyDisplay(energyDisplay, newSum);
             appendEnergyHistory(energyHistory, energy[energy.length - 1], true);
-        } else if (target.id == 'reset') {
+        } else if (t.id == 'reset') {
             reset(energyDisplay, energyHistory);
-        } else if (target.dataset.val) {
-            const newSum = appendEnergy(+target.dataset.val);
+        } else if (t.dataset.val) {
+            const newSum = appendEnergy(+t.dataset.val);
             if (newSum >= 0) {
                 updateEnergyDisplay(energyDisplay, newSum);
                 appendEnergyHistory(energyHistory, energy[energy.length - 1]);
@@ -47,7 +90,7 @@ function initDOM() {
 }
 
 // menu functions
-function showTab(menu, targets, toggleIndex) {
+function showCard(menu, targets, toggleIndex) {
     // check for current active tab
     let activeIndex = undefined;
     for (let i = 0; i < menu.length; i++) {
@@ -68,36 +111,36 @@ function showTab(menu, targets, toggleIndex) {
     }
 
     if (activeIndex) {
-        // when a tab is open
+        // when a card is open
         if (activeIndex == toggleIndex) {
-            // when the current tab is clicked again
+            // when the current card icon is clicked again
             for (let i = 0; i < targets.length; i++) {
                 if (targets[i].dataset.targetIndex == activeIndex) {
-                    tabSlideOut(targets[i]);
+                    cardSlideOut(targets[i]);
                 }
             }
         } else {
-            // when another tab is clicked
+            // when another card icon is clicked
             for (let i = 0; i < targets.length; i++) {
                 if (targets[i].dataset.targetIndex == activeIndex) {
-                    tabSlideOut(targets[i]);
+                    cardSlideOut(targets[i]);
                 }
                 if (targets[i].dataset.targetIndex == toggleIndex) {
-                    tabSlideIn(targets[i]);
+                    cardSlideIn(targets[i]);
                 }
             }
         }
     } else {
-        // when all tabs are closed
+        // when all cards are closed
         for (let i = 0; i < targets.length; i++) {
             if (targets[i].dataset.targetIndex == toggleIndex) {
-                tabSlideIn(targets[i]);
+                cardSlideIn(targets[i]);
             }
         }
     }
 }
 
-function tabSlideIn(element) {
+function cardSlideIn(element) {
     const c = element.classList;
     c.remove('hidden', 'slide-out-top');
     c.add('slide-in-top');
@@ -106,7 +149,7 @@ function tabSlideIn(element) {
     };
 }
 
-function tabSlideOut(element) {
+function cardSlideOut(element) {
     const c = element.classList;
     c.remove('slide-in-top');
     c.add('slide-out-top');
@@ -123,6 +166,42 @@ function setActive(menu, index) {
     }
 }
 
+// slp functions
+async function getSLP() {
+    try {
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=php');
+        const resJson = await res.json();
+        const slp = resJson['smooth-love-potion']['php'];
+        updateSLPPrice(slp);
+        updateSLPPHP();
+    } catch (e) {
+        console.log(e);
+        return;
+    }
+}
+
+function updateSLPPrice(newPrice) {
+    const slpPriceDisplay = document.querySelector('#slp-price');
+    const slpTimeStamp = document.querySelector('#slp-timestamp');
+    const date = new Date();
+    slpPriceDisplay.innerText = `1 SLP = ${newPrice} PHP`;
+    slpTimeStamp.innerText = `via www.coingecko.com\n${date.toLocaleString()}`;
+    slpPrice = newPrice;
+}
+
+function updateSLPPHP() {
+    const slpQuantity = document.querySelector('#slp-quantity').value;
+    const managerShare = document.querySelector('#manager-share').value / 100;
+    const scholarShare = document.querySelector('#scholar-share').value / 100;
+
+    const managerSLP = document.querySelector('#manager-slp');
+    const scholarSLP = document.querySelector('#scholar-slp');
+    const slpphp = document.querySelector('#slp-php');
+
+    slpphp.innerHTML = `Your <b>${slpQuantity} SLP</b> is worth around <b>${(slpQuantity * slpPrice).toFixed(2)} PHP</b>`;
+    managerSLP.innerHTML = `Manager: <b>${(slpQuantity * managerShare * slpPrice).toFixed(2)} PHP</b>`;
+    scholarSLP.innerHTML = `Scholar: <b>${(slpQuantity * scholarShare * slpPrice).toFixed(2)} PHP</b>`;
+}
 // energy functions
 function updateEnergyDisplay(display, newVal) {
     display.innerText = newVal;

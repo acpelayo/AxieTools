@@ -18,6 +18,7 @@
     padding: 0px;
     margin: 0px;
     font-family: Poppins, Arial, Helvetica, sans-serif;
+    touch-action: manipulation;
 }
 
 /* animations */
@@ -116,13 +117,13 @@
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 1.8em;
     text-align: center;
     margin-bottom: 6px;
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 1.2em;
 }
 
 body {
@@ -158,6 +159,18 @@ div.info-card {
     right: 0;
     transform: translate(0, -100vh);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+div.card-contents {
+    width: 100%;
+    height: calc(100% - 50px);
+    margin-top: auto;
+    padding: 0 5% 10%;
+    overflow-y: auto;
 }
 
 div.scroll {
@@ -208,34 +221,12 @@ div.scroll {
 }
 
 /* class chart styling */
-#class-chart {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#class-chart > img {
+#class-chart img {
     width: 100%;
     object-fit: contain;
 }
 
 /* status effects styling */
-#status-effects {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-#status-effects > div {
-    width: 100%;
-    height: calc(100% - 50px);
-    margin-top: auto;
-    padding: 0 5% 10%;
-    overflow-y: scroll;
-}
-
 #status-effects p {
     margin-bottom: 16px;
 }
@@ -254,12 +245,64 @@ div.scroll {
     margin: 40px 0;
 }
 
+/* slp calculator styling */
+#slp-calc .input-container {
+    display: flex;
+}
+
+#slp-calc table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#slp-calc td:nth-child(1) {
+    width: 75%;
+}
+
+#slp-calc td:nth-child(2) {
+    width: 25%;
+    text-align: right;
+    vertical-align: top;
+}
+
+#slp-timestamp {
+    font-size: 0.75em;
+    margin-top: -0.5em;
+    margin-bottom: 2em;
+}
+#slp-calc input {
+    width: 100%;
+    margin-left: auto;
+    text-align: right;
+}
+
+#slp-php {
+    font-size: 2em;
+    text-align: center;
+    margin: 1em 0;
+}
+#manager-slp,
+#scholar-slp {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+#refresh-slp {
+    height: 2em;
+    transition: 200ms ease;
+    cursor: pointer;
+}
+
+@media (hover: hover) {
+    #refresh-slp:hover {
+        fill: var(--orange);
+        transform: scale(1.4);
+    }
+}
+
 /* energy display styling */
 #energy {
-    /* fallback */
-    font-size: 30vh;
-    /* fallback */
-    font-size: clamp(200px, 30vh, 350px);
+    font-size: 15em;
     height: 70%;
     line-height: 0;
     font-weight: 600;
@@ -285,10 +328,7 @@ div.scroll {
 }
 
 #btn > button {
-    /* fallback */
-    font-size: 3vh;
-    /* fallback */
-    font-size: clamp(15px, 3vh, 20px);
+    font-size: 1.3em;
     border: none;
     background-color: var(--brownTransparent75);
     color: var(--white);
@@ -328,25 +368,29 @@ div.scroll {
 }
 
 /* history styling */
-div#history {
+#history {
     --margin: 10px;
     width: calc(100% - var(--margin) * 2);
     height: calc(20% - var(--margin));
     background: rgb(255, 255, 255, 0.75);
     border-radius: 10px;
     margin: 0 var(--margin) var(--margin);
+    padding: 10px;
+}
+
+#history > div {
+    overflow-y: auto;
     display: flex;
     justify-content: flex-start;
     align-content: flex-start;
     flex-wrap: wrap;
-    padding: 10px;
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
 }
 
 div.history-text {
-    /* fallback */
-    font-size: 20px;
-    /* fallback */
-    font-size: clamp(10px, 3vh, 30px);
+    font-size: 1.5em;
 }
 
 .history-text.new-round {

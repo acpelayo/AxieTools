@@ -1,0 +1,25 @@
+{
+    "name": "Axie Helper",
+    "short_name": "Axie Helper",
+    "description": "Web app to help Axie Infinity players",
+    "icons": [
+        {
+            "src": "/assets/icons/icon-192.png",
+            "sizes": "192x192",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/icons/icon-256.png",
+            "sizes": "256x256"
+        },
+        {
+            "src": "/assets/icons/icon-512.png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "index.html",
+    "display": "fullscreen",
+    "theme_color": "#d35400",
+    "background_color": "#d35400",
+    "orientation": "portrait"
+}
