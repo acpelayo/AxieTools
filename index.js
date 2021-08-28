@@ -1,5 +1,6 @@
 const energy = [3];
 let slpPrice;
+let roundNum = 1;
 
 function initDOM() {
     const preloader = document.querySelector('#preloader');
@@ -13,6 +14,7 @@ function initDOM() {
     const scholarShare = document.querySelector('#scholar-share');
     const managerShare = document.querySelector('#manager-share');
 
+    // prevent zoom on touch devices
     document.addEventListener('gesturestart', function (e) {
         e.preventDefault();
         // special hack to prevent zoom-to-tabs gesture in safari
@@ -31,9 +33,11 @@ function initDOM() {
         document.body.style.zoom = 1;
     });
 
+    // fetch slp api
     slpBtn.addEventListener('click', getSLP);
     getSLP();
 
+    // events for slp calculator
     slpQuantity.addEventListener('input', (e) => {
         const t = e.target;
         if (t.value <= 0) t.value = 0;
@@ -51,6 +55,7 @@ function initDOM() {
         updateSLPPHP();
     });
 
+    // menu events
     menu.addEventListener('click', (e) => {
         const index = +e.target.dataset.menuIndex;
 
@@ -68,11 +73,13 @@ function initDOM() {
         }
     });
 
+    // energy button events
     buttons.addEventListener('click', (e) => {
         const t = e.target;
 
         if (t.id == 'endRound') {
             const newSum = appendEnergy(2, true);
+            nextRound();
             updateEnergyDisplay(energyDisplay, newSum);
             appendEnergyHistory(energyHistory, energy[energy.length - 1], true);
         } else if (t.id == 'reset') {
@@ -86,6 +93,7 @@ function initDOM() {
         }
     });
 
+    // preloader
     hidePreloader(preloader);
 }
 
@@ -202,6 +210,7 @@ function updateSLPPHP() {
     managerSLP.innerHTML = `Manager: <b>${(slpQuantity * managerShare * slpPrice).toFixed(2)} PHP</b>`;
     scholarSLP.innerHTML = `Scholar: <b>${(slpQuantity * scholarShare * slpPrice).toFixed(2)} PHP</b>`;
 }
+
 // energy functions
 function updateEnergyDisplay(display, newVal) {
     display.innerText = newVal;
@@ -217,6 +226,8 @@ function resetEnergyHistory(history) {
 
 function reset(energyDisplay, energyHistory) {
     energy.length = 1;
+    roundNum = 0;
+    nextRound();
     updateEnergyDisplay(energyDisplay, 3);
     resetEnergyHistory(energyHistory);
 }
@@ -234,6 +245,10 @@ function appendEnergy(newEnergy, isNewRound = false) {
 
     energy.push(newEnergy);
     return sum + newEnergy;
+}
+
+function nextRound() {
+    document.querySelector('#round-num').innerText = `Round ${(roundNum += 1)}`;
 }
 
 // window functions

@@ -184,6 +184,22 @@ div.scroll {
     justify-content: flex-end;
 }
 
+p.source {
+    font-size: 0.75em;
+    font-style: italic;
+    position: relative;
+    margin-top: 2em;
+}
+
+p.source::before {
+    content: '';
+    background-color: black;
+    transform: translateY(-5px);
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    opacity: 0.5;
+}
 /* menu styling */
 #menu {
     height: 35px;
@@ -269,6 +285,7 @@ div.scroll {
     font-size: 0.75em;
     margin-top: -0.5em;
     margin-bottom: 2em;
+    font-style: italic;
 }
 #slp-calc input {
     width: 100%;
@@ -281,6 +298,7 @@ div.scroll {
     text-align: center;
     margin: 1em 0;
 }
+
 #manager-slp,
 #scholar-slp {
     font-size: 1.5em;
@@ -311,6 +329,13 @@ div.scroll {
     align-items: center;
     justify-content: center;
     pointer-events: none;
+}
+
+/* round number styling */
+#round-num {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--brown);
 }
 
 /* energy button styling */

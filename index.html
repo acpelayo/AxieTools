@@ -5,14 +5,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" />
         <meta name="theme-color" content="#d35400" />
-        <link rel="stylesheet" href="index.css" />
+        <link rel="stylesheet" href="./index.css" />
         <link rel="shortcut icon" href="./assets/icons/icon.ico" type="image/x-icon" />
-        <link rel="manifest" href="manifest.json" />
+        <link rel="manifest" href="./manifest.json" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://api.coingecko.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link rel="apple-touch-icon" href="./assets/icons/icon-192.png" />
-        <script src="index.js" defer></script>
+        <script src="./index.js" defer></script>
         <title>Axie Helper</title>
     </head>
     <body>
@@ -74,6 +74,7 @@
                 <div class="card-contents">
                     <h2>CLASS STRENGTHS AND WEAKNESSES</h2>
                     <img src="./assets/images/weakness-chart.png" alt="weakness chart" />
+                    <p class="source">Retrieved from https://levelskip.com/strategy/Axie-Infinity-Classes-Guide</p>
                 </div>
             </div>
             <div id="status-effects" data-target-index="3" class="hidden info-card">
@@ -113,6 +114,7 @@
                     <p>Decreases Axies morale by 20%. For a designated time. Can Stack.</p>
                     <h3><img src="./assets/icons/attackdown.png" alt="attack down" />Attack Down</h3>
                     <p>Decreases Axies attack by 20%. Stays until next attack. Can Stack.</p>
+                    <p class="source">Retrieved from https://axie.zone/debuffs</p>
                 </div>
             </div>
             <div id="slp-calc" data-target-index="4" class="hidden info-card">
@@ -157,12 +159,13 @@
                     <div class="input-container"></div>
                     <div class="input-container"></div>
                     <p id="slp-php"></p>
-                    <p id="manager-slp"></p>
                     <p id="scholar-slp"></p>
+                    <p id="manager-slp"></p>
                 </div>
             </div>
             <div class="scroll">
                 <p id="energy">3</p>
+                <p id="round-num">Round 1</p>
                 <div id="btn">
                     <button data-val="-4">-4</button>
                     <button data-val="-3">-3</button>
