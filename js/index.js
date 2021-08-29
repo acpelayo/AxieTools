@@ -17,6 +17,7 @@ function initDOM() {
     menu.addEventListener('click', handlers.menuClick);
     buttons.addEventListener('click', handlers.energyBtnClick);
 
+    dom.updateSLPFromStorage();
     handlers.getSLP();
     dom.hidePreloader(preloader);
 }

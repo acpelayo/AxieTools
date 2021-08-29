@@ -13,6 +13,17 @@ function addEnergy(newEnergy, isNewRound = false) {
     return [oldSum + newEnergy, newEnergy];
 }
 
+// localstorage
+function setStorageSLP() {
+    const slp = {
+        quantity: document.querySelector('#slp-quantity').value,
+        scholar: document.querySelector('#scholar-share').value,
+        manager: document.querySelector('#manager-share').value,
+    };
+    localStorage.setItem('slp', JSON.stringify(slp));
+}
+
 export default {
     addEnergy,
+    setStorageSLP,
 };

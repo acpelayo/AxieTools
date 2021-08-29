@@ -82,17 +82,29 @@ function updateSLPPrice(newPrice) {
 
 function updateSLPPHP() {
     const slpQuantity = document.querySelector('#slp-quantity').value;
-    const managerShare = document.querySelector('#manager-share').value / 100;
     const scholarShare = document.querySelector('#scholar-share').value / 100;
+    const managerShare = document.querySelector('#manager-share').value / 100;
     const slpPrice = document.querySelector('#slp-price').dataset.slpPrice;
 
-    const managerSLP = document.querySelector('#manager-slp');
-    const scholarSLP = document.querySelector('#scholar-slp');
     const slpphp = document.querySelector('#slp-php');
+    const scholarSLP = document.querySelector('#scholar-slp');
+    const managerSLP = document.querySelector('#manager-slp');
 
     slpphp.innerHTML = `Your <b>${slpQuantity} SLP</b> is worth around <b>${(slpQuantity * slpPrice).toFixed(2)} PHP</b>`;
     managerSLP.innerHTML = `Manager: <b>${(slpQuantity * managerShare * slpPrice).toFixed(2)} PHP</b>`;
     scholarSLP.innerHTML = `Scholar: <b>${(slpQuantity * scholarShare * slpPrice).toFixed(2)} PHP</b>`;
+}
+
+function updateSLPFromStorage() {
+    const slp = JSON.parse(localStorage.getItem('slp')) || {
+        quantity: 0,
+        scholar: 50,
+        manager: 50,
+    };
+
+    document.querySelector('#slp-quantity').value = slp.quantity;
+    document.querySelector('#scholar-share').value = slp.scholar;
+    document.querySelector('#manager-share').value = slp.manager;
 }
 
 // energy functions
@@ -136,4 +148,5 @@ export default {
     updateEnergyHistory,
     updateSLPPrice,
     updateSLPPHP,
+    updateSLPFromStorage,
 };

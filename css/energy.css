@@ -14,9 +14,11 @@
 
 /* round number styling */
 #round-num {
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: 600;
     color: var(--brown);
+    pointer-events: none;
+    margin-bottom: 0.5em;
 }
 
 /* energy buttons styling */
@@ -25,7 +27,7 @@
     max-height: 100px;
     min-height: 70px;
     width: 90%;
-    margin-bottom: 30px;
+    margin-bottom: 3em;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -34,7 +36,7 @@
 }
 
 #btn > button {
-    font-size: 1.3em;
+    font-size: 1.2em;
     border: none;
     background-color: var(--brownTransparent75);
     color: var(--white);

@@ -26,6 +26,7 @@ function slpQuantityInput(e) {
     if (t.value <= 0) t.value = 0;
     else t.value = +t.value;
     dom.updateSLPPHP();
+    utils.setStorageSLP();
 }
 
 function scholarShareInput(e) {
@@ -34,8 +35,10 @@ function scholarShareInput(e) {
     else if (t.value < 0) t.value = 0;
     else t.value = +t.value;
 
-    document.querySelector('#manager-share').value = 100 - t.value;
+    const managerShare = 100 - t.value;
+    document.querySelector('#manager-share').value = managerShare;
     dom.updateSLPPHP();
+    utils.setStorageSLP();
 }
 
 // menu clicks
