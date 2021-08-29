@@ -1,0 +1,5 @@
+/* class chart styling */
+#class-chart img {
+    width: 100%;
+    object-fit: contain;
+}

@@ -1,0 +1,56 @@
+/* slp calculator styling */
+#slp-calc .input-container {
+    display: flex;
+}
+
+#slp-calc table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#slp-calc td:nth-child(1) {
+    width: 75%;
+}
+
+#slp-calc td:nth-child(2) {
+    width: 25%;
+    text-align: right;
+    vertical-align: top;
+}
+
+#slp-timestamp {
+    font-size: 0.75em;
+    margin-top: -0.5em;
+    margin-bottom: 2em;
+    font-style: italic;
+}
+#slp-calc input {
+    width: 100%;
+    margin-left: auto;
+    text-align: right;
+}
+
+#slp-php {
+    font-size: 2em;
+    text-align: center;
+    margin: 1em 0;
+}
+
+#manager-slp,
+#scholar-slp {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+#refresh-slp {
+    height: 2em;
+    transition: 200ms ease;
+    cursor: pointer;
+}
+
+@media (hover: hover) {
+    #refresh-slp:hover {
+        fill: var(--orange);
+        transform: scale(1.4);
+    }
+}

@@ -1,0 +1,74 @@
+/* energy display styling */
+#energy {
+    font-size: 15em;
+    height: 100%;
+    line-height: 0;
+    font-weight: 600;
+    color: var(--brown);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    margin-top: 45px;
+}
+
+/* round number styling */
+#round-num {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--brown);
+}
+
+/* energy buttons styling */
+#btn {
+    height: 20%;
+    max-height: 100px;
+    min-height: 70px;
+    width: 90%;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#btn > button {
+    font-size: 1.3em;
+    border: none;
+    background-color: var(--brownTransparent75);
+    color: var(--white);
+    width: calc(100% / 8);
+    border-radius: 0;
+    transition: 200ms ease;
+    cursor: pointer;
+    border: 1px solid var(--brownTransparent25);
+}
+
+#btn > #endRound {
+    border-bottom-left-radius: 10px;
+}
+
+#btn > #reset {
+    border-bottom-right-radius: 10px;
+}
+
+#btn > button:nth-child(1) {
+    border-top-left-radius: 10px;
+}
+
+#btn > button:nth-child(8) {
+    border-top-right-radius: 10px;
+}
+
+#btn > button:hover {
+    background-color: var(--orange);
+}
+
+#btn > button#endRound {
+    width: 62.5%;
+}
+
+#btn > button#reset {
+    width: 37.5%;
+}

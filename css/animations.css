@@ -1,0 +1,78 @@
+/* animations */
+@keyframes slide-in-preloader {
+    from {
+        transform: translate(0, -100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out-preloader {
+    from {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translate(0, -100px);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-in-top {
+    from {
+        transform: translate(0, -100vh);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out-top {
+    from {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translate(0, -100vh);
+        opacity: 0;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.slide-in-preloader {
+    animation: slide-in-preloader 1s ease forwards;
+}
+
+.slide-out-preloader {
+    animation: slide-out-preloader 1s ease forwards;
+}
+
+.slide-in-top {
+    animation: slide-in-top 500ms ease forwards;
+}
+
+.slide-out-top {
+    animation: slide-out-top 500ms ease forwards;
+}
+
+.fade-out {
+    animation: fade-out 1s ease forwards;
+}

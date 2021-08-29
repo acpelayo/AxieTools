@@ -1,0 +1,35 @@
+/* menu styling */
+#menu {
+    height: 35px;
+    width: 90%;
+    margin-bottom: auto;
+    padding-top: 10px;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+}
+
+#menu > .icon {
+    width: 25px;
+    height: 25px;
+    fill: var(--brown);
+    transition: 200ms ease;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+@media (hover: hover) {
+    #menu > .icon:hover {
+        fill: var(--orange);
+        transform: scale(1.4);
+    }
+}
+
+#menu > .active {
+    fill: var(--orange);
+    transform: scale(1.4);
+}
+
+#menu svg > * {
+    pointer-events: none;
+}
