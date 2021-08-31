@@ -138,11 +138,11 @@
 }
 
 #default-slp {
-    text-align: right;
     width: 20%;
     max-width: 60px;
     margin-left: 10px;
     font-size: 1.1em;
+    text-align: right;
 }
 
 /* summary styling */
