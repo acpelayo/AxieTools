@@ -28,6 +28,19 @@
     width: 100%;
     margin-left: auto;
     text-align: right;
+    font-size: 1em;
+}
+
+@media screen and (min-width: 500px) {
+    #slp-calc table {
+        font-size: 1.5em;
+    }
+}
+
+#slp-calc input:not(:disabled):hover,
+#slp-calc input:not(:disabled):focus {
+    border: 2px solid var(--orange);
+    outline: none;
 }
 
 #slp-php {

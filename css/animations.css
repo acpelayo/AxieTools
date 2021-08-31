@@ -66,11 +66,11 @@
 }
 
 .slide-in-top {
-    animation: slide-in-top 500ms ease forwards;
+    animation: slide-in-top 350ms ease forwards;
 }
 
 .slide-out-top {
-    animation: slide-out-top 500ms ease forwards;
+    animation: slide-out-top 350ms ease forwards;
 }
 
 .fade-out {

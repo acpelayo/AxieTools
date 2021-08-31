@@ -2,11 +2,15 @@ import dom from './dom.js';
 import handlers from './event-handlers.js';
 
 function initDOM() {
-    const buttons = document.querySelector('#btn');
+    const energyBtn = document.querySelector('#energy-btn');
     const menu = document.querySelector('#menu');
     const slpBtn = document.querySelector('#refresh-slp');
     const slpQuantity = document.querySelector('#slp-quantity');
     const scholarShare = document.querySelector('#scholar-share');
+    const logDefaultSLP = document.querySelector('#default-slp');
+    const logBtn = document.querySelector('#log-btn');
+    const logList = document.querySelector('#log-list tbody');
+    const logClearBtn = document.querySelector('#log-summary svg');
 
     document.addEventListener('gesturestart', handlers.preventZoom);
     document.addEventListener('gesturechange', handlers.preventZoom);
@@ -15,9 +19,16 @@ function initDOM() {
     slpQuantity.addEventListener('input', handlers.slpQuantityInput);
     scholarShare.addEventListener('input', handlers.scholarShareInput);
     menu.addEventListener('click', handlers.menuClick);
-    buttons.addEventListener('click', handlers.energyBtnClick);
+    energyBtn.addEventListener('click', handlers.energyBtnClick);
+    logDefaultSLP.addEventListener('input', handlers.logDefaultSLPInput);
+    logBtn.addEventListener('click', handlers.logBtnClick);
+    logList.addEventListener('click', handlers.logDelete);
+    logList.addEventListener('input', handlers.logSLPInput);
+    logClearBtn.addEventListener('click', handlers.logClear);
 
-    dom.updateSLPFromStorage();
+    dom.setDOMSLPShare();
+    dom.generateLogList();
+    dom.setDOMDefaultSLP();
     handlers.getSLP();
     dom.hidePreloader(preloader);
 }

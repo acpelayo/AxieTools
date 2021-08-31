@@ -1,5 +1,5 @@
 import anim from './animations.js';
-
+import utils from './utils.js';
 // menu functions
 function showCard(toggleIndex) {
     const menu = document.querySelector('#menu').children;
@@ -95,12 +95,8 @@ function updateSLPPHP() {
     scholarSLP.innerHTML = `Scholar: <b>${(slpQuantity * scholarShare * slpPrice).toFixed(2)} PHP</b>`;
 }
 
-function updateSLPFromStorage() {
-    const slp = JSON.parse(localStorage.getItem('slp')) || {
-        quantity: 0,
-        scholar: 50,
-        manager: 50,
-    };
+function setDOMSLPShare() {
+    const slp = utils.getSLP();
 
     document.querySelector('#slp-quantity').value = slp.quantity;
     document.querySelector('#scholar-share').value = slp.scholar;
@@ -138,6 +134,77 @@ function nextRound(isReset = false) {
     roundNumDisplay.innerText = `Round ${currRound}`;
 }
 
+// battle log functions
+function createLogEntry(id, outcome, slp = 0) {
+    const date = new Date(id);
+    const newEntry = document.createElement('tr');
+    newEntry.classList.add('entry');
+    newEntry.dataset.time = id;
+
+    const timestamp = document.createElement('td');
+    const outcomeElem = document.createElement('td');
+    const input = document.createElement('td');
+    const icon = document.createElement('td');
+
+    outcomeElem.classList.add(outcome);
+    icon.classList.add('icon');
+
+    timestamp.innerText = `${date.toLocaleDateString()}\n${date.toLocaleTimeString()}`;
+    outcomeElem.innerText = outcome[0].toUpperCase() + outcome.slice(1);
+
+    input.appendChild(document.createElement('input'));
+    input.appendChild(document.createTextNode('SLP'));
+    input.firstChild.type = 'number';
+    input.firstChild.disabled = outcome == 'lose';
+    input.firstChild.value = slp;
+    input.firstChild.min = 0;
+    input.firstChild.max = 30;
+
+    icon.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'svg'));
+    icon.firstChild.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'path'));
+    icon.firstChild.setAttribute('viewBox', '0 0 95.939 95.939');
+    icon.firstChild.firstChild.setAttribute(
+        'd',
+        'M62.819,47.97l32.533-32.534c0.781-0.781,0.781-2.047,0-2.828L83.333,0.586C82.958,0.211,82.448,0,81.919,0 c-0.53,0-1.039,0.211-1.414,0.586L47.97,33.121L15.435,0.586c-0.75-0.75-2.078-0.75-2.828,0L0.587,12.608 c-0.781,0.781-0.781,2.047,0,2.828L33.121,47.97L0.587,80.504c-0.781,0.781-0.781,2.047,0,2.828l12.02,12.021 c0.375,0.375,0.884,0.586,1.414,0.586c0.53,0,1.039-0.211,1.414-0.586L47.97,62.818l32.535,32.535 c0.375,0.375,0.884,0.586,1.414,0.586c0.529,0,1.039-0.211,1.414-0.586l12.02-12.021c0.781-0.781,0.781-2.048,0-2.828L62.819,47.97z'
+    );
+
+    newEntry.appendChild(timestamp);
+    newEntry.appendChild(outcomeElem);
+    newEntry.appendChild(input);
+    newEntry.appendChild(icon);
+
+    return newEntry;
+}
+
+function updateLogSummary(logs) {
+    const summary = document.querySelector('#log-summary');
+    const win = logs.reduce((total, l) => (l.outcome == 'win' ? total + 1 : total), 0);
+    const draw = logs.reduce((total, l) => (l.outcome == 'draw' ? total + 1 : total), 0);
+    const lose = logs.reduce((total, l) => (l.outcome == 'lose' ? total + 1 : total), 0);
+    const slp = logs.reduce((total, l) => total + l.slp, 0);
+
+    summary.children[1].innerText = `${slp} SLP`;
+    summary.querySelector('.win').innerText = `${win}W`;
+    summary.querySelector('.draw').innerText = `${draw}D`;
+    summary.querySelector('.lose').innerText = `${lose}L`;
+}
+
+function generateLogList() {
+    const logs = utils.getBattleLogs();
+    const logList = document.querySelector('#log-list tbody');
+
+    logs.forEach((l) => {
+        const entry = createLogEntry(l.id, l.outcome, l.slp);
+        logList.prepend(entry);
+    });
+
+    updateLogSummary(logs);
+}
+
+function setDOMDefaultSLP() {
+    document.querySelector('#default-slp').value = utils.getDefaultSLP();
+}
+
 export default {
     hidePreloader,
     newWindow,
@@ -148,5 +215,9 @@ export default {
     updateEnergyHistory,
     updateSLPPrice,
     updateSLPPHP,
-    updateSLPFromStorage,
+    setDOMSLPShare,
+    createLogEntry,
+    updateLogSummary,
+    generateLogList,
+    setDOMDefaultSLP,
 };

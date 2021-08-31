@@ -1,21 +1,31 @@
 /* menu styling */
 #menu {
-    height: 35px;
+    height: 45px;
+    padding-top: 15px;
     width: 90%;
     margin-bottom: auto;
-    padding-top: 10px;
     position: absolute;
     top: 0;
     z-index: 100;
 }
 
 #menu > .icon {
-    width: 25px;
-    height: 25px;
+    height: 30px;
     fill: var(--brown);
     transition: 200ms ease;
     cursor: pointer;
     margin-right: 10px;
+}
+
+@media screen and (min-height: 600px) and (min-width: 400px) {
+    #menu {
+        height: 60px;
+        padding-top: 20px;
+    }
+
+    #menu > .icon {
+        height: 40px;
+    }
 }
 
 @media (hover: hover) {

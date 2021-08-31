@@ -12,22 +12,33 @@
     margin-top: 45px;
 }
 
+@media screen and (min-height: 600px) {
+    #energy {
+        margin-top: 65px;
+    }
+}
+
 /* round number styling */
 #round-num {
     font-size: 2em;
     font-weight: 600;
     color: var(--brown);
     pointer-events: none;
-    margin-bottom: 0.5em;
+}
+
+@media screen and (min-height: 600px) {
+    #round-num {
+        margin-bottom: 0.5em;
+    }
 }
 
 /* energy buttons styling */
-#btn {
+#energy-btn {
     height: 20%;
     max-height: 100px;
     min-height: 70px;
     width: 90%;
-    margin-bottom: 3em;
+    margin-bottom: 1.5em;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -35,42 +46,60 @@
     overflow: hidden;
 }
 
-#btn > button {
-    font-size: 1.2em;
+@media screen and (min-height: 600px) {
+    #energy-btn {
+        margin-bottom: 2.5em;
+    }
+}
+
+#energy-btn > button {
+    font-size: 1.1em;
     border: none;
-    background-color: var(--brownTransparent75);
     color: var(--white);
     width: calc(100% / 8);
     border-radius: 0;
     transition: 200ms ease;
     cursor: pointer;
+    background-color: var(--brownTransparent75);
     border: 1px solid var(--brownTransparent25);
 }
 
-#btn > #endRound {
+@media screen and (min-width: 400px) {
+    #energy-btn > button {
+        font-size: 1.4em;
+    }
+}
+
+#energy-btn > #endRound {
     border-bottom-left-radius: 10px;
 }
 
-#btn > #reset {
+#energy-btn > #reset {
     border-bottom-right-radius: 10px;
 }
 
-#btn > button:nth-child(1) {
+#energy-btn > button:nth-child(1) {
     border-top-left-radius: 10px;
 }
 
-#btn > button:nth-child(8) {
+#energy-btn > button:nth-child(8) {
     border-top-right-radius: 10px;
 }
 
-#btn > button:hover {
+#energy-btn > button:hover {
     background-color: var(--orange);
 }
 
-#btn > button#endRound {
+#energy-btn > button#endRound {
     width: 62.5%;
 }
 
-#btn > button#reset {
+#energy-btn > button#reset {
     width: 37.5%;
+}
+
+#energy-btn > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

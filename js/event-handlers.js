@@ -23,40 +23,28 @@ async function getSLP() {
 
 function slpQuantityInput(e) {
     const t = e.target;
-    if (t.value <= 0) t.value = 0;
-    else t.value = +t.value;
+    t.value = utils.checkInputVal(t.max, t.min, t.value);
+
     dom.updateSLPPHP();
-    utils.setStorageSLP();
+    utils.setSLP();
 }
 
 function scholarShareInput(e) {
     const t = e.target;
-    if (t.value > 100) t.value = 100;
-    else if (t.value < 0) t.value = 0;
-    else t.value = +t.value;
+    t.value = utils.checkInputVal(t.max, t.min, t.value);
 
     const managerShare = 100 - t.value;
     document.querySelector('#manager-share').value = managerShare;
     dom.updateSLPPHP();
-    utils.setStorageSLP();
+    utils.setSLP();
 }
 
 // menu clicks
 function menuClick(e) {
     const index = +e.target.dataset.menuIndex;
 
-    switch (index) {
-        case 1:
-            dom.newWindow();
-            break;
-        case 2:
-        case 3:
-        case 4:
-            dom.showCard(index);
-            break;
-        default:
-            break;
-    }
+    if (index == 1) dom.newWindow();
+    else dom.showCard(index);
 }
 
 // energy button clicks
@@ -80,6 +68,65 @@ function energyBtnClick(e) {
     }
 }
 
+// battle logs win/lose/draw functions
+function logBtnClick(e) {
+    const t = e.target;
+    const outcome = t.dataset.outcome;
+
+    if (outcome) {
+        const id = Date.now();
+        const winSLP = +document.querySelector('#default-slp').value;
+        const slp = outcome == 'win' ? winSLP : outcome == 'draw' ? Math.floor(winSLP / 2) : 0;
+
+        const newEntryElem = dom.createLogEntry(id, outcome, slp);
+        const newEntryObj = {
+            id,
+            outcome,
+            slp,
+        };
+
+        utils.addBattleLog(newEntryObj);
+        document.querySelector('#log-list tbody').prepend(newEntryElem);
+    }
+}
+
+function logDelete(e) {
+    const t = e.target;
+    if (t.nodeName == 'svg') {
+        const entry = t.parentNode.parentNode;
+        const id = entry.dataset.time;
+
+        utils.removeBattleLog(id);
+        entry.parentNode.removeChild(entry);
+    }
+}
+
+function logClear() {
+    document.querySelector('#log-list tbody').innerHTML = '';
+    utils.setBattleLogs([]);
+    dom.updateLogSummary([]);
+}
+
+function logSLPInput(e) {
+    const t = e.target;
+    const entry = t.parentNode.parentNode;
+    const id = +entry.dataset.time;
+
+    t.value = utils.checkInputVal(t.max, t.min, t.value);
+
+    const logs = utils.getBattleLogs();
+    const entryObj = logs.find((l) => l.id == id);
+
+    entryObj.slp = +t.value;
+    utils.setBattleLogs(logs);
+    dom.updateLogSummary(logs);
+}
+
+function logDefaultSLPInput(e) {
+    const t = e.target;
+    t.value = utils.checkInputVal(t.max, t.min, t.value);
+    utils.setDefaultSLP(t.value);
+}
 export default {
     preventZoom,
     getSLP,
@@ -87,4 +134,9 @@ export default {
     scholarShareInput,
     menuClick,
     energyBtnClick,
+    logBtnClick,
+    logDelete,
+    logClear,
+    logSLPInput,
+    logDefaultSLPInput,
 };

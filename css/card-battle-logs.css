@@ -1,0 +1,217 @@
+#battle-log > .card-contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* entry buttons */
+#log-btn {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%;
+    height: 5em;
+}
+
+#log-btn button {
+    width: calc(100% / 3);
+    border-radius: 5px;
+    font-size: 1.5em;
+    transition: 200ms ease;
+    border: none;
+    cursor: pointer;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#log-btn button:nth-child(1):hover {
+    background-color: var(--green);
+}
+
+#log-btn button:nth-child(2):hover {
+    background-color: var(--brownTransparent25);
+}
+
+#log-btn button:nth-child(3):hover {
+    background-color: var(--red);
+}
+
+/* general log table styling */
+#log-list {
+    margin-bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#log-list tr {
+    padding: 5px 10px;
+    width: 100%;
+    display: flex;
+    font-size: 0.85em;
+}
+
+@media screen and (min-width: 400px) {
+    #log-list tr {
+        padding: 5px 30px;
+        font-size: 1em;
+    }
+}
+
+#log-list td:nth-child(1) {
+    font-size: 0.75em;
+    width: 30%;
+}
+
+#log-list td:nth-child(2) {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+#log-list td:nth-child(3) {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 30%;
+}
+
+#log-list td:nth-child(3) input {
+    text-align: right;
+    margin-right: 5px;
+    font-size: 1.2em;
+    width: 100%;
+    height: 90%;
+}
+
+#battle-log input:not(:disabled):hover,
+#battle-log input:not(:disabled):focus {
+    border: 2px solid var(--orange);
+    outline: none;
+}
+
+#log-list td:nth-child(4) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 10%;
+}
+
+@media screen and (min-width: 400px) {
+    #log-list td:nth-child(1) {
+        width: 25%;
+    }
+
+    #log-list td:nth-child(4) {
+        width: 7.5%;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    #log-list td:nth-child(1) {
+        width: 20%;
+    }
+
+    #log-list td:nth-child(3) {
+        width: 20%;
+    }
+
+    #log-list td:nth-child(4) {
+        width: 5%;
+    }
+}
+
+/* default slp */
+.def-slp {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#default-slp {
+    text-align: right;
+    width: 20%;
+    max-width: 60px;
+    margin-left: 10px;
+    font-size: 1.1em;
+}
+
+/* summary styling */
+#log-summary {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+#log-summary td:nth-child(1) {
+    font-size: 1.5em;
+    width: 60%;
+}
+
+#log-summary td:nth-child(2) {
+    text-align: right;
+    margin-left: auto;
+}
+
+#log-summary td:nth-child(3) {
+    width: 10%;
+    margin-left: 0;
+}
+
+@media screen and (min-width: 400px) {
+    #log-summary td:nth-child(3) {
+        width: 7.5%;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    #log-summary td:nth-child(3) {
+        width: 5%;
+    }
+}
+
+#log-summary .icon svg {
+    width: 20px;
+    transition: 200ms ease;
+    cursor: pointer;
+}
+
+/* entry list */
+#log-list .entry {
+    border-radius: 5px;
+    transition: 200ms ease;
+}
+
+#log-list .entry:hover {
+    background-color: var(--brownTransparent25);
+}
+
+#log-list .win {
+    color: var(--green);
+}
+
+#log-list .lose {
+    color: var(--red);
+}
+
+#log-list tbody .icon svg {
+    width: 15px;
+    transition: 200ms ease;
+    cursor: pointer;
+}
+
+#log-list .icon svg:hover {
+    fill: var(--red);
+    transform: scale(1.35);
+}
+
+#log-list .icon svg path {
+    pointer-events: none;
+}

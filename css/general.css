@@ -14,7 +14,7 @@
 }
 
 h2 {
-    font-size: 1.8em;
+    font-size: 1.8rem;
     text-align: center;
     margin-bottom: 6px;
 }
@@ -75,10 +75,16 @@ div.info-card {
 
 div.card-contents {
     width: 100%;
-    height: calc(100% - 50px);
+    height: calc(100% - 65px);
     margin-top: auto;
     padding: 0 5% 10%;
     overflow-y: auto;
+}
+
+@media screen and (min-height: 600px) and (min-width: 400px) {
+    div.card-contents {
+        height: calc(100% - 80px);
+    }
 }
 
 div.scroll {
