@@ -31,6 +31,10 @@ function initDOM() {
     dom.setDOMDefaultSLP();
     handlers.getSLP();
     dom.hidePreloader(preloader);
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js');
+    }
 }
 
 window.onload = initDOM;
