@@ -37,7 +37,7 @@ function initDOM() {
     }
 
     if (window.matchMedia('(display-mode: standalone)').matches) {
-        window.resizeTo(300, 600);
+        window.resizeTo(350, 600);
     }
 }
 
