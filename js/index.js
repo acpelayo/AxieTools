@@ -35,6 +35,10 @@ function initDOM() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js');
     }
+
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        window.resizeTo(300, 600);
+    }
 }
 
 window.onload = initDOM;
