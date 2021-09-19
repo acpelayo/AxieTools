@@ -33,7 +33,7 @@ function initDOM() {
 
     if (window.matchMedia('(display-mode: standalone)').matches) {
         const width = 350;
-        const height = window.screen.height - 100;
+        const height = window.screen.height - 150;
         window.resizeTo(width, height);
         window.moveTo(window.screen.width - width, 0);
     }
