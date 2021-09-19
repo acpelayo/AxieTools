@@ -30,15 +30,19 @@ function initDOM() {
     dom.generateLogList();
     dom.setDOMDefaultSLP();
     handlers.getSLP();
-    dom.hidePreloader(preloader);
+
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        const width = 350;
+        const height = window.screen.height - 100;
+        window.resizeTo(width, height);
+        window.moveTo(window.screen.width - width, 0);
+    }
 
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js');
     }
 
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-        window.resizeTo(350, 600);
-    }
+    dom.hidePreloader(preloader);
 }
 
 window.onload = initDOM;
