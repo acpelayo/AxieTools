@@ -69,6 +69,15 @@ function hidePreloader() {
     preloader.onanimationend = () => preloader.classList.add('hidden');
 }
 
+function setWindowParams() {
+    const width = +localStorage.getItem('width') || 350;
+    const height = +localStorage.getItem('height') || Math.floor(window.screen.height * 0.9);
+    const screenX = +localStorage.getItem('screenX') || window.screen.width - width;
+    const screenY = +localStorage.getItem('screenY') || 0;
+    window.resizeTo(width, height);
+    window.moveTo(screenX, screenY);
+}
+
 // slp functions
 function updateSLPPrice(newPrice) {
     const slpPriceDisplay = document.querySelector('#slp-price');
@@ -220,4 +229,5 @@ export default {
     updateLogSummary,
     generateLogList,
     setDOMDefaultSLP,
+    setWindowParams,
 };

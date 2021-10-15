@@ -32,17 +32,15 @@ function initDOM() {
     handlers.getSLP();
 
     if (window.matchMedia('(display-mode: standalone)').matches) {
-        const width = 350;
-        const height = Math.floor(window.screen.height * 0.9);
-        window.resizeTo(width, height);
-        window.moveTo(window.screen.width - width, 0);
+        window.addEventListener('beforeunload', handlers.updateWindowParams());
+        dom.setWindowParams();
     }
 
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js');
     }
 
-    dom.hidePreloader(preloader);
+    dom.hidePreloader();
 }
 
 window.onload = initDOM;

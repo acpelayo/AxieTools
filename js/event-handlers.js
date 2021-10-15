@@ -7,6 +7,13 @@ function preventZoom(e) {
     document.body.style.zoom = 1;
 }
 
+function updateWindowParams() {
+    localStorage.setItem('width', window.outerWidth);
+    localStorage.setItem('height', window.outerHeight);
+    localStorage.setItem('screenX', window.screenX);
+    localStorage.setItem('screenY', window.screenY);
+}
+
 // slp functions
 async function getSLP() {
     try {
@@ -139,4 +146,5 @@ export default {
     logClear,
     logSLPInput,
     logDefaultSLPInput,
+    updateWindowParams,
 };
